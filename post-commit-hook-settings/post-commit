@@ -1,0 +1,17 @@
+#!/bin/sh
+
+echo "[post-commit hook] Commit done!"
+
+#Allows us to read user input below, assigns stdin to keyboard
+exec < /dev/tty
+
+while true; do
+  read -p "[post-commit hook] Log hours: " hours
+  if [ "$hours" = "" ]; then
+    hours = 1
+  fi
+  echo $hours > hourLog
+  break
+done
+
+python3 log.py
